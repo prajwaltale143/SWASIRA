@@ -1,112 +1,144 @@
 # SWASIRA — Personalized Health & Nutrition Platform
-> *"Health That Understands You"*
 
-Welcome to **SWASIRA**, a personalized, life-stage-aware health and nutrition platform. Rooted in *"Swasth"* (the ancient philosophy of holistic well-being), SWASIRA blends time-honored Indian food wisdom with modern nutritional science to craft daily meal guidance based on your exact age, conditions, allergies, and dietary lifestyle.
+*Health That Understands You*
+
+Welcome to **SWASIRA**, a personalized, life-stage-aware health and nutrition platform. Inspired by the Indian concept of *Swasth* (health and well-being), SWASIRA combines traditional Indian food knowledge with modern nutritional science to provide daily meal guidance based on a person's age, health conditions, allergies, and dietary preferences.
 
 ---
 
 ## 🚀 Quick Start Guide (Windows PowerShell)
 
-Follow these simple steps in **Windows PowerShell** to get SWASIRA up and running on your machine:
+### 1. Install Dependencies
 
-### 1. Install All Dependencies
-Open PowerShell inside the `Swasira` folder and run:
+Open PowerShell inside the `Swasira` project folder and run:
+
 ```powershell
 npm run install:all
 ```
-*(This automatically installs root, backend, and frontend packages.)*
+
+This installs the required packages for the root project, backend, and frontend.
 
 ### 2. Start the Application
-You can start SWASIRA in two ways:
 
-#### Option A: 1-Click Launch (Easiest)
-- Double-click the **Launch SWASIRA** shortcut on your **Desktop**, or
-- Double-click `start_swasira.bat` inside the project folder.
-*(This automatically boots the backend, frontend, and opens http://localhost:5173 in your default browser!)*
+**Option A: One-Click Launch**
 
-To stop all servers at any time, double-click **Stop SWASIRA** on your Desktop or `stop_swasira.bat`.
+Double-click `start_swasira.bat` inside the project folder.
 
-#### Option B: Terminal Command
-To start both the backend API and frontend dev server simultaneously via terminal, run:
+The script is intended to start the backend and frontend and open the application in your browser.
+
+To stop the servers, double-click `stop_swasira.bat`.
+
+**Option B: Terminal**
+
+Run:
+
 ```powershell
 npm run dev
 ```
 
-You will see:
-- 🌿 **Backend API**: `http://localhost:5000`
-- 💻 **Frontend Web App**: `http://localhost:5173`
+The development servers are expected to use these addresses:
 
-Open your web browser and navigate to:
-👉 **[http://localhost:5173](http://localhost:5173)**
+* **Backend API:** `http://localhost:5000`
+* **Frontend:** `http://localhost:5173`
+
+Open `http://localhost:5173` in your browser.
+
+*Note: These commands and addresses depend on the project's current configuration.*
 
 ---
 
-## 🧪 Automated Health & Reliability Check
+## 🧪 Automated Health and Reliability Check
 
-To verify that the database, authentication, onboarding, and recommendation engine are functioning with 100% precision, leave your dev server running and open a second PowerShell terminal, then run:
+Keep the development servers running. Open a second PowerShell terminal in the project folder and run:
 
 ```powershell
 npm run check
 ```
 
-You should see all 5 steps pass:
-```text
-  [PASS] Step 1: GET /api/health responded with status "ok"
-  [PASS] Step 2: POST /api/auth/signup created test user
-  [PASS] Step 3: POST /api/auth/login successfully authenticated
-  [PASS] Step 4: POST /api/onboarding saved user health inputs
-  [PASS] Step 5: GET /api/diet-plan/:userId generated personalized plan
-```
+If the test script is configured as described, it checks these five operations:
+
+1. The health endpoint responds successfully.
+2. User signup works.
+3. User login works.
+4. Onboarding information is saved.
+5. A personalized diet plan can be generated.
+
+The actual results shown in your terminal determine which operations pass.
 
 ---
 
 ## 🎯 Presentation Demo Mode
 
-On the **Signup Page** and **Onboarding Step 1**, an amber **Demo Mode Presentation Panel** is visible. 
-Clicking any team profile (Prajwal, Om, Gauri, Bhumi, Ritesh) pre-fills **strictly** team-specified condition details:
-- **Prajwal**: Migraine
-- **Om**: Body Pain / Stress (Routine: Hectic day)
-- **Gauri**: Weak Immunity
-- **Bhumi**: Period Pain / Menstrual Issues
-- **Ritesh**: Asthma
+The signup page and first onboarding step may include a demo panel for team profiles.
 
-*Note: In accordance with SWASIRA's strict data integrity rule, age, diet type, and body metrics remain null until entered live during the presentation. No fake or assumed data is ever seeded.*
+The project documentation lists these example profiles:
 
----
+* **Prajwal:** Migraine
+* **Om:** Body pain / stress
+* **Gauri:** Weak immunity
+* **Bhumi:** Period pain / menstrual issues
+* **Ritesh:** Asthma
 
-## 🛠️ Architecture & Technologies
+Age, diet type, and body measurements should be entered during the demonstration rather than assumed.
 
-- **Frontend**: React 18, Vite, Tailwind CSS, Framer Motion, Recharts, Lucide Icons.
-- **Backend**: Node.js, Express, Sequelize, SQLite3 (`swasira.sqlite`).
-- **Authentication**: JWT token authentication with pure JavaScript `bcryptjs` password hashing.
-- **Diet Recommendation Engine**: Rule-based matching prioritizing 30+ authentic homemade Indian dishes, condition compatibility, allergen exclusion, and life-stage calibration.
-- **Conversational Intake Companion**: Interactive guided intake with fallback structured assessment.
+*Note: Confirm that these profiles and behaviors are available in the current application before presenting them as working features.*
 
 ---
 
-## 🔧 Troubleshooting Guide (Windows PowerShell)
+## 🛠️ Architecture and Technologies
 
-### 1. "Port 5000 is already in use"
-If port 5000 is occupied by a lingering process, SWASIRA will print a clear message instead of crashing. To free port 5000 on Windows PowerShell, run:
+The project documentation identifies the following technologies:
+
+* **Frontend:** React, Vite, Tailwind CSS, Framer Motion, Recharts, and Lucide Icons.
+* **Backend:** Node.js and Express.
+* **Database:** SQLite, with Sequelize listed as the ORM.
+* **Authentication:** JWT tokens and bcryptjs password hashing.
+* **Diet Recommendation Engine:** Rule-based matching of meals with health conditions, allergies, and life-stage needs.
+* **Conversational Intake:** Guided collection of user information with a structured assessment option.
+
+*The exact technologies and implemented features should be verified against the current source code.*
+
+---
+
+## 🔧 Troubleshooting
+
+### 1. Port 5000 Is Already in Use
+
+Check which process is using port 5000 before stopping it.
+
+In PowerShell, run:
+
 ```powershell
-Get-Process -Id (Get-NetTCPConnection -LocalPort 5000).OwningProcess | Stop-Process -Force
+Get-NetTCPConnection -LocalPort 5000 -ErrorAction SilentlyContinue
 ```
-Then run `npm run dev` again.
 
-### 2. "node is not recognized as an internal or external command"
-Verify that Node.js (version 18 or newer) is installed and added to your system PATH:
+If another process is using the port, identify it before terminating it. Avoid stopping an unknown process.
+
+### 2. Node.js Is Not Recognized
+
+Check whether Node.js and npm are installed:
+
 ```powershell
 node -v
 npm -v
 ```
-If not installed, download the LTS version from [https://nodejs.org/](https://nodejs.org/).
+
+If they are not recognized, install Node.js from the official website:
+
+https://nodejs.org/
+
+Restart your terminal after installation if necessary.
 
 ### 3. Blank Page or Connection Refused
-- Ensure both servers are running via `npm run dev`.
-- Ensure your browser opens `http://localhost:5173` (Vite dev server) which automatically proxies API calls to port 5000.
-- Check browser console (F12) for any local extension blockers.
+
+* Confirm that the backend and frontend have started successfully.
+* Open `http://localhost:5173` in your browser.
+* Check the terminal for errors.
+* Open the browser developer tools with `F12` and inspect the Console tab.
+* Confirm that the frontend API configuration matches the backend address.
 
 ---
 
 ## 📜 Medical Notice
-*SWASIRA provides general wellness and nutritional guidance, not prescriptive medical advice. Always consult certified clinical professionals for acute diagnoses and prescriptions.*
+
+SWASIRA is intended to provide general wellness and nutritional information. It is not a substitute for professional medical advice, diagnosis, or treatment. Consult a qualified healthcare professional for medical concerns, treatment decisions, or condition-specific dietary guidance.
